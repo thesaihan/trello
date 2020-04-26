@@ -6,13 +6,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class List {
+public class List extends MainModel {
 	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String title;
+	private Integer position;
 	private Integer status;
 	
 	
@@ -27,6 +28,12 @@ public class List {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public Integer getPosition() {
+		return position;
+	}
+	public void setPosition(Integer position) {
+		this.position = position;
 	}
 	public Integer getStatus() {
 		return status;

@@ -5,11 +5,13 @@ import java.util.Map;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-public class MainController {
+@RequestMapping("account")
+public class AccountController {
 	
 	@GetMapping
 	public Map<String, String> getVersion() {
