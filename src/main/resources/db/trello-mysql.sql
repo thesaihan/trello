@@ -64,7 +64,7 @@ CREATE TABLE `card` (
   `last_updated` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `list_id` (`list_id`),
-  CONSTRAINT `card_ibfk_1` FOREIGN KEY (`list_id`) REFERENCES `list` (`id`)
+  CONSTRAINT `card_ibfk_1` FOREIGN KEY (`list_id`) REFERENCES `list` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -91,8 +91,8 @@ CREATE TABLE `card_member` (
   `date_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`card_id`,`account_username`),
   KEY `account_username` (`account_username`),
-  CONSTRAINT `card_member_ibfk_1` FOREIGN KEY (`card_id`) REFERENCES `card` (`id`),
-  CONSTRAINT `card_member_ibfk_2` FOREIGN KEY (`account_username`) REFERENCES `account` (`username`)
+  CONSTRAINT `card_member_ibfk_1` FOREIGN KEY (`card_id`) REFERENCES `card` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `card_member_ibfk_2` FOREIGN KEY (`account_username`) REFERENCES `account` (`username`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
