@@ -27,5 +27,10 @@ public class ListController {
 	public java.util.List<List> getByPositionGTE(@PathVariable Integer position) {
 		return listRepository.findByPositionGreaterThanEqual(position);
 	}
+	
+	@GetMapping("title/{searchTerm}")
+	public java.util.List<List> getByPositionGTE(@PathVariable String searchTerm) {
+		return listRepository.findByTitleContaining(searchTerm);
+	}
 
 }
