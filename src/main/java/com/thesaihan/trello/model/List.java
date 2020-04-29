@@ -29,6 +29,7 @@ public class List extends MainModel {
 	@OneToMany(cascade = CascadeType.REMOVE,
             fetch = FetchType.LAZY,
             mappedBy = "list")
+	@OrderBy("position asc")
 	private Set<Card> cards = new HashSet<Card>();
 	
 	public Long getId() {
