@@ -1,9 +1,16 @@
 package com.thesaihan.trello.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -19,6 +26,10 @@ public class List extends MainModel {
 	private Integer position;
 	private Integer status;
 	
+	@OneToMany(cascade = CascadeType.REMOVE,
+            fetch = FetchType.LAZY,
+            mappedBy = "list")
+	private Set<Card> cards = new HashSet<Card>();
 	
 	public Long getId() {
 		return id;
@@ -43,6 +54,12 @@ public class List extends MainModel {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	public Set<Card> getCards() {
+		return cards;
+	}
+	public void setCards(Set<Card> cards) {
+		this.cards = cards;
 	}
 	
 
