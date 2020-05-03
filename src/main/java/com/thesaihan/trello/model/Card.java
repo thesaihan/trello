@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Card extends MainModel {
 	
@@ -21,6 +23,7 @@ public class Card extends MainModel {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "list_id", nullable = false)
+	@JsonIgnoreProperties("cards")
 	private List list;
 	
 	public Long getId() {
@@ -52,6 +55,12 @@ public class Card extends MainModel {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	public List getList() {
+		return list;
+	}
+	public void setList(List list) {
+		this.list = list;
 	}
 
 }
