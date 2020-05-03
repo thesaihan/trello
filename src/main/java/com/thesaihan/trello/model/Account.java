@@ -24,7 +24,7 @@ public class Account extends MainModel{
 	private String name;
 	@Temporal(TemporalType.DATE)
 	private Date dob;
-	private Short verified;
+	private Short verified = 0;
 	public Long getId() {
 		return id;
 	}
