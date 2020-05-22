@@ -19,7 +19,7 @@ public class Card extends MainModel {
 	private String title;
 	private String description;
 	private Integer position;
-	private Integer status;
+	private Integer status = 1;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "list_id", nullable = false)
