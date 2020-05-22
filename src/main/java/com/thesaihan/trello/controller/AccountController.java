@@ -42,7 +42,7 @@ public class AccountController {
 	@RequestMapping(method = RequestMethod.PUT)
 	public Account update(@RequestBody Account account) {
 		Account oldAccount = accountRepository.getOne(account.getUsername());
-		BeanUtils.copyProperties(account, oldAccount, "id", "username");
+		BeanUtils.copyProperties(account, oldAccount, "id", "username", "verified");
 		return accountRepository.saveAndFlush(oldAccount);
 	}
 	
