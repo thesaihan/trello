@@ -1,11 +1,15 @@
 package com.thesaihan.trello.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -25,6 +29,14 @@ public class Card extends MainModel {
 	@JoinColumn(name = "list_id", nullable = false)
 	@JsonIgnoreProperties("cards")
 	private List list;
+
+	@ManyToMany
+	@JoinTable(
+		name = "card_member",
+		joinColumns = @JoinColumn(name = "card_id"),
+		inverseJoinColumns = @JoinColumn(name = "account_username")
+	)
+	private Set<Account> members;
 	
 	public Long getId() {
 		return id;
@@ -63,4 +75,11 @@ public class Card extends MainModel {
 		this.list = list;
 	}
 
+	public Set<Account> getMembers() {
+		return members;
+	}
+	public void setMembers(Set<Account> members) {
+		this.members = members;
+	}
+	
 }
