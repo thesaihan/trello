@@ -24,7 +24,7 @@ public class List extends MainModel {
 	private Long id;
 	private String title;
 	private Integer position;
-	private Integer status;
+	private Integer status = 1;
 	
 	@OneToMany(cascade = CascadeType.REMOVE,
             fetch = FetchType.LAZY,
