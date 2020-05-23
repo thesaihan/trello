@@ -1,5 +1,6 @@
 package com.thesaihan.trello.controller;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.thesaihan.trello.model.Account;
 import com.thesaihan.trello.model.Card;
+import com.thesaihan.trello.model.Label;
 import com.thesaihan.trello.repository.AccountRepository;
 import com.thesaihan.trello.repository.CardRepository;
+import com.thesaihan.trello.repository.LabelRepository;
 
 @RestController
 @CrossOrigin
@@ -30,6 +33,8 @@ public class CardController {
 	CardRepository cardRepository;
 	@Autowired
 	AccountRepository accountRepository;
+	@Autowired
+	LabelRepository labelRepository;
 	
 	@GetMapping
 	public List<Card> getAll() {
@@ -67,6 +72,18 @@ public class CardController {
 		}
 		members.add(accountRepository.getOne(payload.get("accountUsername").toString()));
 		card.setMembers(members);
+		return cardRepository.saveAndFlush(card);
+	}
+
+	@PostMapping(value = "add-label")
+	public Card addLabel(@RequestBody Map<String, Long> payload) {
+		Card card = cardRepository.getOne(payload.get("cardId"));
+		Set<Label> labels = card.getLabels();
+		if(labels == null) {
+			labels = new HashSet<>();
+		}
+		labels.add(labelRepository.getOne(payload.get("labelId")));
+		card.setLabels(labels);
 		return cardRepository.saveAndFlush(card);
 	}
 
