@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Card extends MainModel {
 	
 	@Id
@@ -37,6 +38,14 @@ public class Card extends MainModel {
 		inverseJoinColumns = @JoinColumn(name = "account_username")
 	)
 	private Set<Account> members;
+
+	@ManyToMany
+	@JoinTable(
+		name = "card_label",
+		joinColumns = @JoinColumn(name = "card_id"),
+		inverseJoinColumns = @JoinColumn(name = "label_id")
+	)
+	private Set<Label> labels;
 	
 	public Long getId() {
 		return id;
@@ -80,6 +89,14 @@ public class Card extends MainModel {
 	}
 	public void setMembers(Set<Account> members) {
 		this.members = members;
+	}
+
+	public Set<Label> getLabels() {
+		return labels;
+	}
+
+	public void setLabels(Set<Label> labels) {
+		this.labels = labels;
 	}
 	
 }
