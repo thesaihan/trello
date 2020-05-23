@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.thesaihan.trello.model.Account;
 import com.thesaihan.trello.model.Card;
+import com.thesaihan.trello.model.Checklist;
 import com.thesaihan.trello.model.Label;
 import com.thesaihan.trello.repository.AccountRepository;
 import com.thesaihan.trello.repository.CardRepository;
@@ -83,6 +84,17 @@ public class CardController {
 		}
 		labels.add(labelRepository.getOne(payload.get("labelId")));
 		card.setLabels(labels);
+		return cardRepository.saveAndFlush(card);
+	}
+
+	@PostMapping(value = "replace-checklist")
+	public Card addChecklist(@RequestBody Card payload) {
+		Card card = cardRepository.getOne(payload.getId());
+		Set<Checklist> checklists = payload.getChecklists();
+		if(checklists == null) {
+			checklists = new HashSet<>();
+		}
+		card.setChecklists(checklists);
 		return cardRepository.saveAndFlush(card);
 	}
 

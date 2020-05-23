@@ -2,6 +2,7 @@ package com.thesaihan.trello.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -46,6 +49,14 @@ public class Card extends MainModel {
 		inverseJoinColumns = @JoinColumn(name = "label_id")
 	)
 	private Set<Label> labels;
+
+	@OneToMany(
+		mappedBy = "card",
+		fetch = FetchType.LAZY,
+		cascade = CascadeType.REMOVE
+	)
+	@OrderBy("position asc")
+	private Set<Checklist> checklists;
 	
 	public Long getId() {
 		return id;
@@ -97,6 +108,14 @@ public class Card extends MainModel {
 
 	public void setLabels(Set<Label> labels) {
 		this.labels = labels;
+	}
+
+	public Set<Checklist> getChecklists() {
+		return checklists;
+	}
+
+	public void setChecklists(Set<Checklist> checklists) {
+		this.checklists = checklists;
 	}
 	
 }
