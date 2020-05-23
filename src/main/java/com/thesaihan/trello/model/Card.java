@@ -51,7 +51,7 @@ public class Card extends MainModel {
 	private Set<Label> labels;
 
 	@OneToMany(
-		mappedBy = "card",
+		mappedBy = "cardId",
 		fetch = FetchType.LAZY,
 		cascade = CascadeType.REMOVE
 	)
