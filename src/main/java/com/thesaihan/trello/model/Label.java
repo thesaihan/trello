@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Label {
+public class Label extends MainModel {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
