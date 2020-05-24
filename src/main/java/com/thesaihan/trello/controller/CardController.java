@@ -1,13 +1,17 @@
 package com.thesaihan.trello.controller;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +26,7 @@ import com.thesaihan.trello.model.Checklist;
 import com.thesaihan.trello.model.Label;
 import com.thesaihan.trello.repository.AccountRepository;
 import com.thesaihan.trello.repository.CardRepository;
+import com.thesaihan.trello.repository.ChecklistRepository;
 import com.thesaihan.trello.repository.LabelRepository;
 
 @RestController
@@ -35,6 +40,8 @@ public class CardController {
 	AccountRepository accountRepository;
 	@Autowired
 	LabelRepository labelRepository;
+	@Autowired
+	ChecklistRepository checklistRepository;
 	
 	@GetMapping
 	public List<Card> getAll() {
@@ -87,15 +94,24 @@ public class CardController {
 		return cardRepository.saveAndFlush(card);
 	}
 
-	@PostMapping(value = "replace-checklist")
+	@PostMapping(value = "reorder-checklist")
 	public Card addChecklist(@RequestBody Card payload) {
 		Card card = cardRepository.getOne(payload.getId());
-		Set<Checklist> checklists = payload.getChecklists();
+		List<Checklist> checklists = payload.getChecklists();
 		if(checklists == null) {
-			checklists = new HashSet<>();
+			checklists = new ArrayList<>();
+		}
+		for(int i=0; i<checklists.size(); i++) {
+			checklists.get(i).setPosition((short)i);
 		}
 		card.setChecklists(checklists);
 		return cardRepository.saveAndFlush(card);
 	}
+	
+	@Transactional
+  @DeleteMapping("{cardId}/checklist")
+  public Long deleteChecklistByCardId(@PathVariable Long cardId) {
+    return checklistRepository.deleteByCardId(cardId);
+  }
 
 }

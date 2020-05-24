@@ -56,7 +56,7 @@ public class Card extends MainModel {
 		cascade = CascadeType.REMOVE
 	)
 	@OrderBy("position asc")
-	private Set<Checklist> checklists;
+	private java.util.List<Checklist> checklists;
 	
 	public Long getId() {
 		return id;
@@ -110,11 +110,11 @@ public class Card extends MainModel {
 		this.labels = labels;
 	}
 
-	public Set<Checklist> getChecklists() {
+	public java.util.List<Checklist> getChecklists() {
 		return checklists;
 	}
 
-	public void setChecklists(Set<Checklist> checklists) {
+	public void setChecklists(java.util.List<Checklist> checklists) {
 		this.checklists = checklists;
 	}
 	
