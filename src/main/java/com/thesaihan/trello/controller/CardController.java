@@ -33,7 +33,7 @@ import com.thesaihan.trello.repository.LabelRepository;
 @CrossOrigin
 @RequestMapping("card")
 public class CardController {
-	
+
 	@Autowired
 	CardRepository cardRepository;
 	@Autowired
@@ -42,7 +42,7 @@ public class CardController {
 	LabelRepository labelRepository;
 	@Autowired
 	ChecklistRepository checklistRepository;
-	
+
 	@GetMapping
 	public List<Card> getAll() {
 		return cardRepository.findAll();
@@ -70,11 +70,11 @@ public class CardController {
 		cardRepository.deleteById(id);
 	}
 
-	@PostMapping(value = "add-member")
+	@PostMapping(value = "member")
 	public Card addMember(@RequestBody Map<String, Object> payload) {
 		Card card = cardRepository.getOne(Long.parseLong(payload.get("cardId").toString()));
 		Set<Account> members = card.getMembers();
-		if(members == null){
+		if (members == null) {
 			members = new HashSet<>();
 		}
 		members.add(accountRepository.getOne(payload.get("accountUsername").toString()));
@@ -82,14 +82,38 @@ public class CardController {
 		return cardRepository.saveAndFlush(card);
 	}
 
-	@PostMapping(value = "add-label")
+	@PostMapping(value = "label")
 	public Card addLabel(@RequestBody Map<String, Long> payload) {
 		Card card = cardRepository.getOne(payload.get("cardId"));
 		Set<Label> labels = card.getLabels();
-		if(labels == null) {
+		if (labels == null) {
 			labels = new HashSet<>();
 		}
 		labels.add(labelRepository.getOne(payload.get("labelId")));
+		card.setLabels(labels);
+		return cardRepository.saveAndFlush(card);
+	}
+
+	@DeleteMapping(value = "member")
+	public Card removeMember(@RequestBody Map<String, Object> payload) {
+		Card card = cardRepository.getOne(Long.parseLong(payload.get("cardId").toString()));
+		Set<Account> members = card.getMembers();
+		if (members == null) {
+			members = new HashSet<>();
+		}
+		members.removeIf(acc -> acc.getUsername().equals(payload.get("accountUsername").toString()));
+		card.setMembers(members);
+		return cardRepository.saveAndFlush(card);
+	}
+
+	@DeleteMapping(value = "label")
+	public Card removeLabel(@RequestBody Map<String, Long> payload) {
+		Card card = cardRepository.getOne(payload.get("cardId"));
+		Set<Label> labels = card.getLabels();
+		if (labels == null) {
+			labels = new HashSet<>();
+		}
+		labels.removeIf(lbl -> lbl.getId().equals(payload.get("labelId")));
 		card.setLabels(labels);
 		return cardRepository.saveAndFlush(card);
 	}
@@ -98,20 +122,20 @@ public class CardController {
 	public Card addChecklist(@RequestBody Card payload) {
 		Card card = cardRepository.getOne(payload.getId());
 		List<Checklist> checklists = payload.getChecklists();
-		if(checklists == null) {
+		if (checklists == null) {
 			checklists = new ArrayList<>();
 		}
-		for(int i=0; i<checklists.size(); i++) {
-			checklists.get(i).setPosition((short)i);
+		for (int i = 0; i < checklists.size(); i++) {
+			checklists.get(i).setPosition((short) i);
 		}
 		card.setChecklists(checklists);
 		return cardRepository.saveAndFlush(card);
 	}
-	
+
 	@Transactional
-  @DeleteMapping("{cardId}/checklist")
-  public Long deleteChecklistByCardId(@PathVariable Long cardId) {
-    return checklistRepository.deleteByCardId(cardId);
-  }
+	@DeleteMapping("{cardId}/checklist")
+	public Long deleteChecklistByCardId(@PathVariable Long cardId) {
+		return checklistRepository.deleteByCardId(cardId);
+	}
 
 }
