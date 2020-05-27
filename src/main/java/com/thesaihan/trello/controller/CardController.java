@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.BeanUtils;
@@ -119,15 +118,18 @@ public class CardController {
 	}
 
 	@PostMapping(value = "reorder-checklist")
-	public Card addChecklist(@RequestBody Card payload) {
-		Card card = cardRepository.getOne(payload.getId());
-		List<Checklist> checklists = payload.getChecklists();
-		if (checklists == null) {
-			checklists = new ArrayList<>();
+	public Card reorderChecklist(@RequestBody Map<String, Object> payload) {
+		// not working yet
+		Card card = cardRepository.getOne(Long.valueOf(payload.get("id").toString()));
+		List<Long> checklistIds = (ArrayList) payload.get("checklistIds");
+
+		List<Checklist> checklists = new ArrayList<>();
+		for(int i=0; i<checklistIds.size(); i++) {
+			Checklist chkli = checklistRepository.getOne(checklistIds.get(i));
+			chkli.setPosition((short) (i+1));
+			checklists.add(chkli);
 		}
-		for (int i = 0; i < checklists.size(); i++) {
-			checklists.get(i).setPosition((short) i);
-		}
+
 		card.setChecklists(checklists);
 		return cardRepository.saveAndFlush(card);
 	}
