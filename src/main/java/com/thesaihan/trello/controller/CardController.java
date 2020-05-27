@@ -151,4 +151,11 @@ public class CardController {
 		return cardRepository.saveAndFlush(c);
 	}
 
+	@PostMapping("change-status")
+	public Card changeStatus(@RequestBody Map<String, Long> payload) {
+		Card c = cardRepository.getOne(payload.get("id"));
+		c.setStatus((int) payload.get("status").longValue());
+		return cardRepository.saveAndFlush(c);
+	}
+
 }
