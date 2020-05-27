@@ -1,0 +1,699 @@
+{
+	"info": {
+		"_postman_id": "39fefe8e-c642-459c-8fc3-15100551ece5",
+		"name": "trello",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "account",
+			"item": [
+				{
+					"name": "allAccounts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/account",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/account/johndoe",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"account",
+								"johndoe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"johnsmith\",\n    \"name\": \"John Smith\",\n    \"email\": \"smith@gmail.com\",\n    \"dob\": \"1997-04-05\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/account",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"thesaihan\",\n    \"name\": \"Sai Han Ba\",\n    \"email\": \"thesaihan@gmail.com\",\n    \"dob\": \"1997-04-04\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/account",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/account/thesaihan2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"account",
+								"thesaihan2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "card",
+			"item": [
+				{
+					"name": "allCard",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/card",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"card"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/card/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"card",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveCard",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Learn SQL\",\n    \"description\": \"MySQL is awesome!\",\n    \"position\": 1,\n    \"status\": 1,\n    \"list\": {\n        \"id\": 2\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/card",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"card"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add card member",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cardId\":1,\n\t\"accountUsername\":\"thesaihan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/card/member",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"card",
+								"member"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add card label",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cardId\":1,\n\t\"labelId\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/card/label",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"card",
+								"label"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove card member",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cardId\":1,\n\t\"accountUsername\":\"thesaihan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/card/member",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"card",
+								"member"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove card label",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cardId\":1,\n\t\"labelId\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/card/label",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"card",
+								"label"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reorder checklist items",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 2,\n    \"checklistIds\": [\n        2, 1\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/card/reorder-checklist",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"card",
+								"reorder-checklist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change List Ownership",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 2, \n\t\"listId\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/card/change-list",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"card",
+								"change-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changeStatus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 1,\n\t\"status\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/card/change-status",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"card",
+								"change-status"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "label",
+			"item": [
+				{
+					"name": "getLabel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/label",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"label"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveLabel",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"Test\",\n\t\"color\":\"#b2a3e5\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/label",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"label"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateLabel",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 3,\n    \"name\": \"Test\",\n    \"color\": \"#34ba55\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/label",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"label"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteLabel",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/label/4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"label",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "checklist",
+			"item": [
+				{
+					"name": "saveChecklist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cardId\": 1,\n    \"title\": \"Checklist\",\n    \"item\": \"Checklist Item 2\",\n    \"position\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/checklist",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"checklist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveAll checklists",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"cardId\": 1,\n        \"title\": \"Checklist\",\n        \"item\": \"Prepare Tests\",\n        \"position\": 1\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/checklist/{cardId}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"checklist",
+								"{cardId}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateChecklist",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"item\": \"Checklist Item 2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/checklist",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"checklist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteByCardId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/checklist/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"checklist",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "list",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/list",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/list/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"list",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveList",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"New Trello List\",\n    \"position\": 4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/list",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changeStatus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 1,\n\t\"status\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/list/change-status",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"list",
+								"change-status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteList",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/list/4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"list",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
