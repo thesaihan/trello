@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 import com.thesaihan.trello.model.List;
 import com.thesaihan.trello.repository.ListRepository;
 
@@ -57,6 +59,13 @@ public class ListController {
 	@GetMapping("title/{searchTerm}")
 	public java.util.List<List> getByPositionGTE(@PathVariable String searchTerm) {
 		return listRepository.findByTitleContaining(searchTerm);
+	}
+
+	@PostMapping("change-status")
+	public List changeStatus(@RequestBody Map<String, Long> payload) {
+		List li = listRepository.getOne(payload.get("id"));
+		li.setStatus((int) payload.get("status").longValue());
+		return listRepository.saveAndFlush(li);
 	}
 
 }
