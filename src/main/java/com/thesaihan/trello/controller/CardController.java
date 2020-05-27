@@ -27,6 +27,7 @@ import com.thesaihan.trello.repository.AccountRepository;
 import com.thesaihan.trello.repository.CardRepository;
 import com.thesaihan.trello.repository.ChecklistRepository;
 import com.thesaihan.trello.repository.LabelRepository;
+import com.thesaihan.trello.repository.ListRepository;
 
 @RestController
 @CrossOrigin
@@ -41,6 +42,8 @@ public class CardController {
 	LabelRepository labelRepository;
 	@Autowired
 	ChecklistRepository checklistRepository;
+	@Autowired
+	ListRepository listRepository;
 
 	@GetMapping
 	public List<Card> getAll() {
@@ -138,6 +141,14 @@ public class CardController {
 	@DeleteMapping("{cardId}/checklist")
 	public Long deleteChecklistByCardId(@PathVariable Long cardId) {
 		return checklistRepository.deleteByCardId(cardId);
+	}
+
+	@PostMapping("change-list")
+	public Card changeList(@RequestBody Map<String, Long> payload) {
+		Card c = cardRepository.getOne(payload.get("id"));
+		com.thesaihan.trello.model.List newList = listRepository.getOne(payload.get("listId"));
+		c.setList(newList);
+		return cardRepository.saveAndFlush(c);
 	}
 
 }
