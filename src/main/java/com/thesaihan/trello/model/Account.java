@@ -15,8 +15,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Account extends MainModel{
 	
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
 	@Id
 	private String username;
 	private String email;
@@ -24,12 +22,7 @@ public class Account extends MainModel{
 	@Temporal(TemporalType.DATE)
 	private Date dob;
 	private Short verified = 0;
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 	public String getUsername() {
 		return username;
 	}
