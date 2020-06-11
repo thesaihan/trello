@@ -16,7 +16,7 @@ public class MainController {
 		Map<String, String> app = new HashMap<>();
 		app.put("name", "Trello (Clone) REST API");
 		app.put("description", "Backend REST API for a copy version of Trello using Spring Boot and Spring Data JPA");
-		app.put("version", "v1.0");
+		app.put("version", "v1.1");
 		return app;
 	}
 
