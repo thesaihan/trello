@@ -1,6 +1,7 @@
 package com.thesaihan.trello.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import com.thesaihan.trello.model.Checklist;
 import com.thesaihan.trello.repository.ChecklistRepository;
@@ -55,6 +56,13 @@ public class ChecklistController {
   @PostMapping("{cardId}")
   public List<Checklist> saveAll(@RequestBody List<Checklist> checklists) {
     return checklistRepository.saveAll(checklists);
+  }
+
+  @PostMapping("check")
+  public Checklist check(@RequestBody Map<String, Object> payload) {
+    Checklist chk = checklistRepository.getOne(Long.valueOf(payload.get("id").toString()));
+    chk.setChecked(Short.valueOf(payload.get("checked").toString()));
+    return checklistRepository.saveAndFlush(chk);
   }
 
 }

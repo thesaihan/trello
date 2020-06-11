@@ -3,8 +3,6 @@ package com.thesaihan.trello.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,7 +20,7 @@ public class Account extends MainModel{
 	@Temporal(TemporalType.DATE)
 	private Date dob;
 	private Short verified = 0;
-	
+
 	public String getUsername() {
 		return username;
 	}

@@ -20,6 +20,7 @@ public class Checklist extends MainModel {
   private String title;
   private String item;
   private Short position;
+  private Short checked = 0;
 
   public Long getId() {
     return id;
@@ -59,6 +60,14 @@ public class Checklist extends MainModel {
 
   public void setPosition(Short position) {
     this.position = position;
+  }
+
+  public Short getChecked() {
+    return checked;
+  }
+
+  public void setChecked(Short checked) {
+    this.checked = checked;
   }
 
 }
