@@ -59,9 +59,8 @@ public class ChecklistController {
   }
 
   @PostMapping("check")
-  public Checklist check(@RequestBody Map<String, Object> payload) {
-    Checklist chk = checklistRepository.getOne(Long.valueOf(payload.get("id").toString()));
-    chk.setChecked(Short.valueOf(payload.get("checked").toString()));
+  public Checklist check(@RequestBody Map<String, Long> payload) {
+    Checklist chk = checklistRepository.getOne(payload.get("id"));
     return checklistRepository.saveAndFlush(chk);
   }
 
