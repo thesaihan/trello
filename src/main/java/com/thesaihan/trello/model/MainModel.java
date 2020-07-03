@@ -12,6 +12,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @MappedSuperclass
@@ -25,11 +26,13 @@ public class MainModel {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="date_created", updatable = false)
 	@CreatedDate
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date dateCreated;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="last_updated")
 	@LastModifiedDate
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date lastUpdated;
 
 	public Date getDateCreated() {
