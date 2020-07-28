@@ -12,7 +12,7 @@
 	</parent>
 	<groupId>com.thesaihan</groupId>
 	<artifactId>trello</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.2.RELEASE</version>
 	<name>trello</name>
 	<description>Spring Boot project for Trello REST API</description>
 
@@ -82,9 +82,9 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>prod</id>
+			<id>test</id>
 			<properties>
-				<spring.profiles.active>prod</spring.profiles.active>
+				<spring.profiles.active>test</spring.profiles.active>
 			</properties>
 		</profile>
 	</profiles>
