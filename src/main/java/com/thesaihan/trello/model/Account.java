@@ -1,11 +1,9 @@
 package com.thesaihan.trello.model;
 
 import java.util.Date;
+import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -20,6 +18,13 @@ public class Account extends MainModel{
 	@Temporal(TemporalType.DATE)
 	private Date dob;
 	private Short verified = 0;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "account_role",
+			joinColumns = @JoinColumn(name = "account_username"),
+			inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles;
 
 	public String getUsername() {
 		return username;
@@ -52,4 +57,11 @@ public class Account extends MainModel{
 		this.verified = verified;
 	}
 
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 }
