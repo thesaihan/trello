@@ -18,6 +18,7 @@ public class Account extends MainModel{
 	@Temporal(TemporalType.DATE)
 	private Date dob;
 	private Short verified = 0;
+	private String password;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
@@ -57,6 +58,14 @@ public class Account extends MainModel{
 		this.verified = verified;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public Set<Role> getRoles() {
 		return roles;
 	}
@@ -64,4 +73,5 @@ public class Account extends MainModel{
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+
 }
